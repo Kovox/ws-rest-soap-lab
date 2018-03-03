@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3f2ef3e9-bfba-4ae6-ae27-db3d565b57cc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/VelibServices" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="VelibServices.xsd" MetadataType="Schema" ID="31a2ef1f-5615-465c-8979-f619233c62be" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd0" />
+    <MetadataFile FileName="VelibServices.wsdl" MetadataType="Wsdl" ID="a9710f58-a504-4649-a46c-fa88a2d29e7a" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?wsdl" />
+    <MetadataFile FileName="VelibServices1.xsd" MetadataType="Schema" ID="59880ac7-49a7-4e1b-a1d7-e26b646c8727" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd1" />
+    <MetadataFile FileName="VelibServices.disco" MetadataType="Disco" ID="ea29a90c-a4ff-4bc5-bdbd-dd14a0892852" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
