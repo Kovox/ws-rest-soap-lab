@@ -77,6 +77,7 @@
             this.BikesButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.BikesButton.UseVisualStyleBackColor = true;
             this.BikesButton.Click += new System.EventHandler(this.Bikes_Click);
+            this.BikesButton.MouseHover += new System.EventHandler(this.BikesButton_MouseHover);
             // 
             // StationsButton
             // 
@@ -95,6 +96,7 @@
             this.StationsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.StationsButton.UseVisualStyleBackColor = true;
             this.StationsButton.Click += new System.EventHandler(this.Stations_Click);
+            this.StationsButton.MouseHover += new System.EventHandler(this.StationsButton_MouseHover);
             // 
             // JCDecaux
             // 
@@ -138,8 +140,8 @@
             // Results
             // 
             this.Results.AcceptsReturn = true;
-            this.Results.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.Results.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Results.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.Results.BorderStyle = System.Windows.Forms.BorderStyle.None;

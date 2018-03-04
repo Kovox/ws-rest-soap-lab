@@ -38,6 +38,12 @@ namespace VelibClientGui
             CheckSearchActivateButtonState();
         }
 
+        private void StationsButton_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip sbToolTip = new ToolTip();
+            sbToolTip.SetToolTip(StationsButton, "Request for the list of velib stations for a given city");
+        }
+
         // Bikes button
 
         private void Bikes_Click(object sender, EventArgs e)
@@ -48,6 +54,12 @@ namespace VelibClientGui
             StationTextBox.Enabled = true;
             focus = 1;
             CheckSearchActivateButtonState();
+        }
+
+        private void BikesButton_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip bbToolTip = new ToolTip();
+            bbToolTip.SetToolTip(BikesButton, "Request the number of the available Velib at a given station");
         }
 
         // City text box
@@ -129,6 +141,5 @@ namespace VelibClientGui
                     break;
             }
         }
-
     }
 }
