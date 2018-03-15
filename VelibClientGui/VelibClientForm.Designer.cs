@@ -36,14 +36,15 @@
             this.ButtonSidePanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ResultsLabel = new System.Windows.Forms.Label();
-            this.Results = new System.Windows.Forms.TextBox();
             this.ResultsPanel = new System.Windows.Forms.Panel();
             this.FieldsPanel = new System.Windows.Forms.Panel();
+            this.Usage = new System.Windows.Forms.TextBox();
             this.SearchValidateButton = new System.Windows.Forms.Button();
             this.StationTextBox = new System.Windows.Forms.TextBox();
             this.CityTextBox = new System.Windows.Forms.TextBox();
             this.StationLabel = new System.Windows.Forms.Label();
             this.CityLabel = new System.Windows.Forms.Label();
+            this.ResultBox = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.FieldsPanel.SuspendLayout();
@@ -120,8 +121,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.ResultBox);
             this.panel2.Controls.Add(this.ResultsLabel);
-            this.panel2.Controls.Add(this.Results);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(201, 265);
             this.panel2.Name = "panel2";
@@ -137,25 +138,6 @@
             this.ResultsLabel.TabIndex = 1;
             this.ResultsLabel.Text = "R e s u l t s:";
             // 
-            // Results
-            // 
-            this.Results.AcceptsReturn = true;
-            this.Results.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Results.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.Results.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Results.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Results.ForeColor = System.Drawing.Color.White;
-            this.Results.Location = new System.Drawing.Point(15, 35);
-            this.Results.MaxLength = 2147483647;
-            this.Results.Multiline = true;
-            this.Results.Name = "Results";
-            this.Results.ReadOnly = true;
-            this.Results.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Results.Size = new System.Drawing.Size(775, 224);
-            this.Results.TabIndex = 0;
-            // 
             // ResultsPanel
             // 
             this.ResultsPanel.BackColor = System.Drawing.Color.White;
@@ -166,6 +148,7 @@
             // 
             // FieldsPanel
             // 
+            this.FieldsPanel.Controls.Add(this.Usage);
             this.FieldsPanel.Controls.Add(this.SearchValidateButton);
             this.FieldsPanel.Controls.Add(this.StationTextBox);
             this.FieldsPanel.Controls.Add(this.CityTextBox);
@@ -175,6 +158,19 @@
             this.FieldsPanel.Name = "FieldsPanel";
             this.FieldsPanel.Size = new System.Drawing.Size(782, 246);
             this.FieldsPanel.TabIndex = 4;
+            // 
+            // Usage
+            // 
+            this.Usage.AcceptsReturn = true;
+            this.Usage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.Usage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Usage.Enabled = false;
+            this.Usage.ForeColor = System.Drawing.Color.White;
+            this.Usage.Location = new System.Drawing.Point(201, 166);
+            this.Usage.Multiline = true;
+            this.Usage.Name = "Usage";
+            this.Usage.Size = new System.Drawing.Size(578, 62);
+            this.Usage.TabIndex = 6;
             // 
             // SearchValidateButton
             // 
@@ -226,6 +222,19 @@
             this.CityLabel.TabIndex = 0;
             this.CityLabel.Text = "C i t y:";
             // 
+            // ResultBox
+            // 
+            this.ResultBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.ResultBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ResultBox.ForeColor = System.Drawing.Color.White;
+            this.ResultBox.FormattingEnabled = true;
+            this.ResultBox.ItemHeight = 23;
+            this.ResultBox.Location = new System.Drawing.Point(19, 32);
+            this.ResultBox.Name = "ResultBox";
+            this.ResultBox.Size = new System.Drawing.Size(774, 207);
+            this.ResultBox.TabIndex = 2;
+            this.ResultBox.SelectedIndexChanged += new System.EventHandler(this.ResultBox_SelectedIndexChanged);
+            // 
             // VelibClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
@@ -261,7 +270,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button StationsButton;
         private System.Windows.Forms.Button BikesButton;
-        private System.Windows.Forms.TextBox Results;
         private System.Windows.Forms.Panel ButtonSidePanel;
         private System.Windows.Forms.Panel ResultsPanel;
         private System.Windows.Forms.Label ResultsLabel;
@@ -271,5 +279,7 @@
         private System.Windows.Forms.Label StationLabel;
         private System.Windows.Forms.Label CityLabel;
         private System.Windows.Forms.Button SearchValidateButton;
+        private System.Windows.Forms.TextBox Usage;
+        private System.Windows.Forms.ListBox ResultBox;
     }
 }

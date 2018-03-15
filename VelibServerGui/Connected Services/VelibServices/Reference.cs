@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VelibClientConsole.VelibServices {
+namespace VelibServerGui.VelibServices {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -29,12 +29,12 @@ namespace VelibClientConsole.VelibServices {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IVelibServicesChannel : VelibClientConsole.VelibServices.IVelibServices, System.ServiceModel.IClientChannel {
+    public interface IVelibServicesChannel : VelibServerGui.VelibServices.IVelibServices, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class VelibServicesClient : System.ServiceModel.ClientBase<VelibClientConsole.VelibServices.IVelibServices>, VelibClientConsole.VelibServices.IVelibServices {
+    public partial class VelibServicesClient : System.ServiceModel.ClientBase<VelibServerGui.VelibServices.IVelibServices>, VelibServerGui.VelibServices.IVelibServices {
         
         public VelibServicesClient() {
         }

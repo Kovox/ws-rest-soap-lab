@@ -22,6 +22,7 @@
     <MetadataSource Address="http://localhost:8733/VelibServices" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="VelibServices21.xsd" MetadataType="Schema" ID="a987fc2b-861e-4b83-a64d-0dde9e3be0ec" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd2" />
     <MetadataFile FileName="VelibServices.xsd" MetadataType="Schema" ID="83b73740-601e-418d-b500-8953b06ebb84" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd0" />
     <MetadataFile FileName="VelibServices.wsdl" MetadataType="Wsdl" ID="369eaa67-89cf-40c9-bc13-e2d704371a2e" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?wsdl" />
     <MetadataFile FileName="VelibServices1.xsd" MetadataType="Schema" ID="d4cdb97a-fd5b-40ac-8bb6-4bb65d464d65" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd1" />

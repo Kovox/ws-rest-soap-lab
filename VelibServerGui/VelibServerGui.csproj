@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2AA57985-5FF3-4823-B092-57AB6E4A8CAB}</ProjectGuid>
+    <ProjectGuid>{9D0B51F6-37E3-4B3E-866D-64D694A625C4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>VelibClientGui</RootNamespace>
-    <AssemblyName>VelibClientGui</AssemblyName>
+    <RootNamespace>VelibServerGui</RootNamespace>
+    <AssemblyName>VelibServerGui</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,6 +39,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,20 +56,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Popup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VelibClientForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VelibClientForm.Designer.cs">
-      <DependentUpon>VelibClientForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Popup.resx">
-      <DependentUpon>Popup.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="VelibServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VelibServerForm.Designer.cs">
+      <DependentUpon>VelibServerForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,8 +73,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="VelibClientForm.resx">
-      <DependentUpon>VelibClientForm.cs</DependentUpon>
+    <EmbeddedResource Include="VelibServerForm.resx">
+      <DependentUpon>VelibServerForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Connected Services\VelibServices\VelibServices.wsdl" />
     <None Include="Connected Services\VelibServices\VelibServices.xsd">
@@ -88,10 +83,9 @@
     <None Include="Connected Services\VelibServices\VelibServices1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\VelibServices\VelibServices21.xsd">
+    <None Include="Connected Services\VelibServices\VelibServices2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\DataSources\VelibLibrary.City.datasource" />
     <None Include="Properties\DataSources\VelibLibrary.Station.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -115,7 +109,6 @@
     <None Include="Connected Services\VelibServices\configuration91.svcinfo" />
     <None Include="Connected Services\VelibServices\VelibServices.disco" />
     <Content Include="JCDecaux_Icon.ico" />
-    <Content Include="search.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -125,7 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VelibLibrary\VelibLibrary.csproj">
-      <Project>{CDB85851-98BA-499A-86F9-32BC4123C1FF}</Project>
+      <Project>{cdb85851-98ba-499a-86f9-32bc4123c1ff}</Project>
       <Name>VelibLibrary</Name>
     </ProjectReference>
   </ItemGroup>

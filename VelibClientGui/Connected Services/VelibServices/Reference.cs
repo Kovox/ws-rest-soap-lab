@@ -16,16 +16,16 @@ namespace VelibClientGui.VelibServices {
     public interface IVelibServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibServices/GetStationsInCity", ReplyAction="http://tempuri.org/IVelibServices/GetStationsInCityResponse")]
-        string GetStationsInCity(string city);
+        VelibLibrary.Station[] GetStationsInCity(string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibServices/GetStationsInCity", ReplyAction="http://tempuri.org/IVelibServices/GetStationsInCityResponse")]
-        System.Threading.Tasks.Task<string> GetStationsInCityAsync(string city);
+        System.Threading.Tasks.Task<VelibLibrary.Station[]> GetStationsInCityAsync(string city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibServices/GetAvailableVelibsInStation", ReplyAction="http://tempuri.org/IVelibServices/GetAvailableVelibsInStationResponse")]
-        string GetAvailableVelibsInStation(string station);
+        VelibLibrary.Station GetAvailableVelibsInStation(string city, string station);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibServices/GetAvailableVelibsInStation", ReplyAction="http://tempuri.org/IVelibServices/GetAvailableVelibsInStationResponse")]
-        System.Threading.Tasks.Task<string> GetAvailableVelibsInStationAsync(string station);
+        System.Threading.Tasks.Task<VelibLibrary.Station> GetAvailableVelibsInStationAsync(string city, string station);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,20 +55,20 @@ namespace VelibClientGui.VelibServices {
                 base(binding, remoteAddress) {
         }
         
-        public string GetStationsInCity(string city) {
+        public VelibLibrary.Station[] GetStationsInCity(string city) {
             return base.Channel.GetStationsInCity(city);
         }
         
-        public System.Threading.Tasks.Task<string> GetStationsInCityAsync(string city) {
+        public System.Threading.Tasks.Task<VelibLibrary.Station[]> GetStationsInCityAsync(string city) {
             return base.Channel.GetStationsInCityAsync(city);
         }
         
-        public string GetAvailableVelibsInStation(string station) {
-            return base.Channel.GetAvailableVelibsInStation(station);
+        public VelibLibrary.Station GetAvailableVelibsInStation(string city, string station) {
+            return base.Channel.GetAvailableVelibsInStation(city, station);
         }
         
-        public System.Threading.Tasks.Task<string> GetAvailableVelibsInStationAsync(string station) {
-            return base.Channel.GetAvailableVelibsInStationAsync(station);
+        public System.Threading.Tasks.Task<VelibLibrary.Station> GetAvailableVelibsInStationAsync(string city, string station) {
+            return base.Channel.GetAvailableVelibsInStationAsync(city, station);
         }
     }
 }

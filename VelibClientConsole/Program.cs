@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using VelibClientConsole.VelibServices;
+using VelibLibrary;
 
 namespace VelibClientConsole
 {
@@ -12,7 +13,6 @@ namespace VelibClientConsole
 
         static void Main(string[] args)
         {
-
             Console.WriteLine("Interactive command line interface started. " + HELP_SYMBOL + " for help.\n");
             Boolean shouldContinue = true;
 
@@ -57,7 +57,7 @@ namespace VelibClientConsole
                 "Available user commands:\n" +
                 "  - quit: Exit Velib Application\n" +
                 "  - stations: Request for the list of velib stations for a given city.\n    Does support city name with spaces (stations CITY)\n" +
-                "  - available_bikes: Request the number of the available Velib at a given station.\n    Does support station name with spaces (available_bikes STATION)\n");
+                "  - available_bikes: Request the number of the available Velib at a given station in a city.\n    Does support station name with spaces (available_bikes CITY STATION)\n");
         }
 
         private static Boolean ProcessCommand(String keyword, List<String> rawArgs)
@@ -71,27 +71,47 @@ namespace VelibClientConsole
                     {
                         Console.WriteLine("Illegal arguments for command " + keyword);
                     }
-                    else if (rawArgs.Count == 1)
+                    else if (rawArgs.Count >= 1)
                     {
-                        Console.WriteLine(client.GetStationsInCity(rawArgs[0]));
-                    }
-                    else
-                    {
-                        Console.WriteLine(client.GetStationsInCity(String.Join(" ", rawArgs.ToArray())));
+                        String city = String.Join(" ", rawArgs.ToArray());
+                        String resultCityStation = "List of all the available stations in " + city + ":\n";
+                        Station[] stations = client.GetStationsInCity(city);
+
+                        if (stations.Length != 0)
+                        {
+                            for (int i = 0; i < stations.Length; i++)
+                            {
+                                resultCityStation += (i + 1) + " - " + stations[i].name + "\n";
+                            }
+                            Console.WriteLine(resultCityStation);
+                        }
+                        else
+                        {
+                            Console.WriteLine("The city " + city + " doesn't exist.");
+                        }
                     }
                     break;
                 case "available_bikes":
-                    if (rawArgs.Count < 1)
+                    if (rawArgs.Count < 2)
                     {
                         Console.WriteLine("Illegal arguments for command " + keyword);
                     }
-                    else if (rawArgs.Count == 1)
+                    else if (rawArgs.Count >= 2)
                     {
-                        Console.WriteLine(client.GetAvailableVelibsInStation(rawArgs[0]));
-                    }
-                    else
-                    {
-                        Console.WriteLine(client.GetAvailableVelibsInStation(String.Join(" ", rawArgs.ToArray())));
+                        String city = rawArgs[0];
+                        rawArgs.Remove(rawArgs[0]);
+                        String station = String.Join(" ", rawArgs.ToArray());
+                        Station s = client.GetAvailableVelibsInStation(city, station);
+
+                        if (s.name != null)
+                        {
+                            Console.WriteLine(s.available_bikes + " bikes available at " + s.name + " station.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The station " + station + " or the city " + city +
+                                " doesn't exist.");
+                        }
                     }
                     break;
                 default:

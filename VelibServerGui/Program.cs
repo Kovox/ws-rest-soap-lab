@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace VelibClientGui
+namespace VelibServerGui
 {
     static class Program
     {
@@ -13,7 +13,7 @@ namespace VelibClientGui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new VelibClientForm());
+            Application.Run(new VelibServerForm());
         }
     }
 }

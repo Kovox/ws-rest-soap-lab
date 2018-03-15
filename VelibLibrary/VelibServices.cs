@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace VelibLibrary
 {
@@ -6,24 +7,24 @@ namespace VelibLibrary
     {
         private JCDecauxRequestHandler requestHandler = new JCDecauxRequestHandler();
 
-        public String GetStationsInCity(String city)
+        public List<Station> GetStationsInCity(String city)
         {
-            String request = CacheExtension.Get<String>(city);
+            List<Station> request = CacheExtension.Get<List<Station>>(city);
             if (request == null)
             {
-                request += requestHandler.RequestStations(city);
+                request = requestHandler.RequestStations(city);
                 CacheExtension.Add(city, request);
             }
             return request;
         }
 
-        public String GetAvailableVelibsInStation(String station)
+        public Station GetAvailableVelibsInStation(String city, String station)
         {
-            String request = CacheExtension.Get<String>(station);
+            Station request = CacheExtension.Get<Station>(city + station);
             if (request == null)
             {
-                request += requestHandler.RequestAvailableVelibsInStation(station);
-                CacheExtension.Add(station, request);
+                request = requestHandler.RequestAvailableVelibsInStation(city, station);
+                CacheExtension.Add(city + station, request);
             }
             return request;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace VelibLibrary
@@ -7,9 +8,9 @@ namespace VelibLibrary
     public interface IVelibServices
     {
         [OperationContract]
-        String GetStationsInCity(String city);
+        List<Station> GetStationsInCity(String city);
 
         [OperationContract]
-        String GetAvailableVelibsInStation(String station);
+        Station GetAvailableVelibsInStation(String city, String station);
     }
 }

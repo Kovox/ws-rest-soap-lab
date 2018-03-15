@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using Newtonsoft.Json.Linq;
 
 namespace VelibLibrary
 {
@@ -11,42 +12,38 @@ namespace VelibLibrary
         private HttpWebResponse response;
         private Stream dataStream;
         private StreamReader reader;
-        private JArray jsonArray;
 
-        public String RequestStations(String city)
+        public List<Station> RequestStations(String city)
         {
             string resultCityStation = Request("https://api.jcdecaux.com/vls/v1/stations?contract=" + city.ToUpper() + "&apiKey=9894216d065ff63cb3e3bf5f4eaad9f6da88df50");
             if (!resultCityStation.Equals("error"))
             {
-                jsonArray = JArray.Parse(resultCityStation);
-                resultCityStation = "List of all the available stations in " + city + ":\n";
-                int indexCityStations = 1;
-                foreach (JObject item in jsonArray)
-                {
-                    resultCityStation += indexCityStations++ + " - " + (String)item.GetValue("name") + "\n";
-                }
                 Clear();
-                return resultCityStation;
+                return JsonConvert.DeserializeObject<List<Station>>(resultCityStation); ;
             }
             else
             {
-                return "The city " + city + " doesn't exist.";
+                return new List<Station>();
             }
         }
 
-        public String RequestAvailableVelibsInStation(String station)
+        public Station RequestAvailableVelibsInStation(String city, String station)
         {
-            string resultStations = Request("https://api.jcdecaux.com/vls/v1/stations?apiKey=9894216d065ff63cb3e3bf5f4eaad9f6da88df50");
+            string resultStations = Request("https://api.jcdecaux.com/vls/v1/stations?contract=" + 
+                city.ToUpper() + "&apiKey=9894216d065ff63cb3e3bf5f4eaad9f6da88df50");
             Clear();
-            Station result = new Station(station, resultStations);
-            if (result.Exists)
+            if (!resultStations.Equals("error"))
             {
-                return result.AvailableBikes + " bikes available at " + result.Name + " station.";
+                List<Station> stations = JsonConvert.DeserializeObject<List<Station>>(resultStations);
+                foreach (Station s in stations)
+                {
+                    if (s.name.ToUpper().Contains(station.ToUpper()))
+                    {
+                        return s;
+                    }
+                }
             }
-            else
-            {
-                return "The station " + station + " doesn't exist.";
-            }
+            return new Station();
         }
 
         private String Request(String url)
@@ -61,7 +58,6 @@ namespace VelibLibrary
             try
             {
                 response = (HttpWebResponse)request.GetResponse();
-
             }
             catch (WebException)
             {
@@ -87,6 +83,5 @@ namespace VelibLibrary
             reader.Close();
             response.Close();
         }
-
     }
 }

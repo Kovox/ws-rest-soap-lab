@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VelibClientGui.VelibServices;
+using VelibLibrary;
 
 namespace VelibClientGui
 {
@@ -16,14 +19,19 @@ namespace VelibClientGui
         private Boolean cityTextBoxReady = false;
         private Boolean stationTextBoxReady = false;
 
+        private static String lastCity = "";
+        private static String lastStation = "";
+
         private static VelibServicesClient client = new VelibServicesClient("WSHTTP");
 
         public VelibClientForm()
         {
             InitializeComponent();
             SearchValidateButton.Enabled = false;
+            StationTextBox.Enabled = false;
             ButtonSidePanel.Height = StationsButton.Height;
             ButtonSidePanel.Top = StationsButton.Top;
+            ChangeUsageLabel();
         }
 
         // Stations button
@@ -36,6 +44,7 @@ namespace VelibClientGui
             StationTextBox.Enabled = false;
             focus = 0;
             CheckSearchActivateButtonState();
+            ChangeUsageLabel();
         }
 
         private void StationsButton_MouseHover(object sender, EventArgs e)
@@ -50,10 +59,11 @@ namespace VelibClientGui
         {
             ButtonSidePanel.Height = BikesButton.Height;
             ButtonSidePanel.Top = BikesButton.Top;
-            CityTextBox.Enabled = false;
+            CityTextBox.Enabled = true;
             StationTextBox.Enabled = true;
             focus = 1;
             CheckSearchActivateButtonState();
+            ChangeUsageLabel();
         }
 
         private void BikesButton_MouseHover(object sender, EventArgs e)
@@ -96,13 +106,37 @@ namespace VelibClientGui
 
         private void SearchValidateButton_Click(object sender, EventArgs e)
         {
+            ResultBox.Items.Clear();
+            lastCity = CityTextBox.Text;
             switch (focus)
             {
                 case 0:
-                    Results.Text = client.GetStationsInCity(CityTextBox.Text).Replace("\n", Environment.NewLine);
+                    Station[] stations = client.GetStationsInCity(CityTextBox.Text);
+                    if (stations.Length != 0)
+                    {
+                        for (int i = 0; i < stations.Length; i++)
+                        {
+                            ResultBox.Items.Add(i + " - " + stations[i].name);
+                        }
+                    }
+                    else
+                    {
+                        ResultBox.Items.Add("The city " + CityTextBox.Text + " doesn't exist.");
+                    }
                     break;
                 case 1:
-                    Results.Text = client.GetAvailableVelibsInStation(StationTextBox.Text).Replace("\n", Environment.NewLine); ;
+                    lastStation = StationTextBox.Text;
+                    Station station = client.GetAvailableVelibsInStation(CityTextBox.Text, StationTextBox.Text);
+                    if (station.name != null)
+                    {
+                        ResultBox.Items.Add(station.bike_stands +
+                        " bikes available at " + station.name + " station.");
+                    }
+                    else
+                    {
+                        ResultBox.Items.Add("The station " + StationTextBox.Text + " or the city " +
+                            CityTextBox.Text + " doesn't exist.");
+                    }
                     break;
             }
         }
@@ -130,13 +164,50 @@ namespace VelibClientGui
                     }
                     break;
                 case 1:
-                    if (stationTextBoxReady)
+                    if (cityTextBoxReady && stationTextBoxReady)
                     {
                         SearchValidateButton.Enabled = true;
                     }
                     else
                     {
                         SearchValidateButton.Enabled = false;
+                    }
+                    break;
+            }
+        }
+
+        private void ChangeUsageLabel()
+        {
+            switch (focus)
+            {
+                case 0:
+                    Usage.Text = "U s a g e: Request for the list of velib stations for a given city. Does support city name with spaces";
+                    break;
+                case 1:
+                    Usage.Text = "U s a g e: Request the number of the available Velib at a given station in a city. Does support station name with spaces";
+                    break;
+            }
+        }
+
+        private void ResultBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (focus)
+            {
+                case 0:
+                    List<Station> stations = client.GetStationsInCity(lastCity).ToList();
+                    foreach (Station station in stations)
+                    {
+                        if (ResultBox.Items[ResultBox.SelectedIndex].ToString().Contains(station.name))
+                        {
+                            new Popup(station).Show();
+                        }
+                    }
+                    break;
+                case 1:
+                    Station s = client.GetAvailableVelibsInStation(lastCity, lastStation);
+                    if (s.name != null)
+                    {
+                        new Popup(s).Show();
                     }
                     break;
             }
