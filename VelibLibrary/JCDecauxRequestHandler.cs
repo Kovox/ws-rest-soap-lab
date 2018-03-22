@@ -3,19 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace VelibLibrary
 {
     class JCDecauxRequestHandler
     {
         private HttpWebRequest request;
-        private HttpWebResponse response;
+        private WebResponse response;
         private Stream dataStream;
         private StreamReader reader;
 
-        public List<Station> RequestStations(String city)
+        public async Task<List<Station>> RequestStations(String city)
         {
-            string resultCityStation = Request("https://api.jcdecaux.com/vls/v1/stations?contract=" + city.ToUpper() + "&apiKey=9894216d065ff63cb3e3bf5f4eaad9f6da88df50");
+            string resultCityStation = await Request("https://api.jcdecaux.com/vls/v1/stations?contract=" + city.ToUpper() + "&apiKey=9894216d065ff63cb3e3bf5f4eaad9f6da88df50");
             if (!resultCityStation.Equals("error"))
             {
                 Clear();
@@ -27,9 +28,9 @@ namespace VelibLibrary
             }
         }
 
-        public Station RequestAvailableVelibsInStation(String city, String station)
+        public async Task<Station> RequestAvailableVelibsInStation(String city, String station)
         {
-            string resultStations = Request("https://api.jcdecaux.com/vls/v1/stations?contract=" +
+            string resultStations = await Request("https://api.jcdecaux.com/vls/v1/stations?contract=" +
                 city.ToUpper() + "&apiKey=9894216d065ff63cb3e3bf5f4eaad9f6da88df50");
             Clear();
             if (!resultStations.Equals("error"))
@@ -46,7 +47,7 @@ namespace VelibLibrary
             return new Station();
         }
 
-        private String Request(String url)
+        private async Task<String> Request(String url)
         {
             // Create a request for the URL.
             request = (HttpWebRequest)WebRequest.Create(url);
@@ -57,7 +58,7 @@ namespace VelibLibrary
             // Get the response.
             try
             {
-                response = (HttpWebResponse)request.GetResponse();
+                response = await request.GetResponseAsync();
             }
             catch (WebException)
             {

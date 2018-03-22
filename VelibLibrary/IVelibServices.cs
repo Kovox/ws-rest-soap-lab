@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace VelibLibrary
 {
@@ -8,9 +9,9 @@ namespace VelibLibrary
     public interface IVelibServices
     {
         [OperationContract]
-        List<Station> GetStationsInCity(String city);
+        Task<List<Station>> GetStationsInCity(String city);
 
         [OperationContract]
-        Station GetAvailableVelibsInStation(String city, String station);
+        Task<Station> GetAvailableVelibsInStation(String city, String station);
     }
 }

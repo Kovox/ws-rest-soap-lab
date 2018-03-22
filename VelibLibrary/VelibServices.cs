@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace VelibLibrary
 {
@@ -7,23 +9,24 @@ namespace VelibLibrary
     {
         private JCDecauxRequestHandler requestHandler = new JCDecauxRequestHandler();
 
-        public List<Station> GetStationsInCity(String city)
+        public async Task<List<Station>> GetStationsInCity(String city)
         {
             List<Station> request = CacheExtension.Get<List<Station>>(city);
             if (request == null)
             {
-                request = requestHandler.RequestStations(city);
+                request = await requestHandler.RequestStations(city);
                 CacheExtension.Add(city, request);
             }
+            Thread.Sleep(5000);
             return request;
         }
 
-        public Station GetAvailableVelibsInStation(String city, String station)
+        public async Task<Station> GetAvailableVelibsInStation(String city, String station)
         {
             Station request = CacheExtension.Get<Station>(city + station);
             if (request == null)
             {
-                request = requestHandler.RequestAvailableVelibsInStation(city, station);
+                request = await requestHandler.RequestAvailableVelibsInStation(city, station);
                 CacheExtension.Add(city + station, request);
             }
             return request;
