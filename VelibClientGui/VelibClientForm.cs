@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -15,6 +14,8 @@ namespace VelibClientGui
         /// 1 = BikesButton
         /// </summary>
         private Int16 focus = 0;
+
+        private Boolean error = false;
 
         private Boolean cityTextBoxReady = false;
         private Boolean stationTextBoxReady = false;
@@ -69,7 +70,7 @@ namespace VelibClientGui
         private void BikesButton_MouseHover(object sender, EventArgs e)
         {
             ToolTip bbToolTip = new ToolTip();
-            bbToolTip.SetToolTip(BikesButton, "Request the number of the available Velib at a given station");
+            bbToolTip.SetToolTip(BikesButton, "Request the number of the available Velib at a given station in a given city");
         }
 
         // City text box
@@ -104,20 +105,23 @@ namespace VelibClientGui
 
         // Search validate button
 
-        private void SearchValidateButton_Click(object sender, EventArgs e)
+        private async void SearchValidateButton_Click(object sender, EventArgs e)
         {
-            ResultBox.Items.Clear();
+            error = true;
+            ResultBox.DataSource = null;
             lastCity = CityTextBox.Text;
             switch (focus)
             {
                 case 0:
-                    Station[] stations = client.GetStationsInCity(CityTextBox.Text);
+                    Station[] stations = await client.GetStationsInCityAsync(CityTextBox.Text);
                     if (stations.Length != 0)
                     {
-                        for (int i = 0; i < stations.Length; i++)
-                        {
-                            ResultBox.Items.Add(i + " - " + stations[i].name);
-                        }
+                        ResultBox.SelectedIndexChanged -= ResultBox_SelectedIndexChanged;
+                        ResultBox.DataSource = stations;
+                        ResultBox.DisplayMember = "name";
+                        ResultBox.SelectedIndex = -1; 
+                        ResultBox.SelectedIndexChanged += ResultBox_SelectedIndexChanged;
+                        error = false;
                     }
                     else
                     {
@@ -126,11 +130,16 @@ namespace VelibClientGui
                     break;
                 case 1:
                     lastStation = StationTextBox.Text;
-                    Station station = client.GetAvailableVelibsInStation(CityTextBox.Text, StationTextBox.Text);
-                    if (station.name != null)
+                    Station station = await client.GetAvailableVelibsInStationAsync(CityTextBox.Text, StationTextBox.Text);
+                    if (station != null && station.name != null)
                     {
-                        ResultBox.Items.Add(station.bike_stands +
-                        " bikes available at " + station.name + " station.");
+                        List<Station> s = new List<Station>() { station };
+                        ResultBox.SelectedIndexChanged -= ResultBox_SelectedIndexChanged;
+                        ResultBox.DataSource = s;
+                        ResultBox.DisplayMember = "BikesAvailable";
+                        ResultBox.SelectedIndex = -1;
+                        ResultBox.SelectedIndexChanged += ResultBox_SelectedIndexChanged;
+                        error = false;
                     }
                     else
                     {
@@ -191,25 +200,9 @@ namespace VelibClientGui
 
         private void ResultBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (focus)
+            if (!error)
             {
-                case 0:
-                    List<Station> stations = client.GetStationsInCity(lastCity).ToList();
-                    foreach (Station station in stations)
-                    {
-                        if (ResultBox.Items[ResultBox.SelectedIndex].ToString().Contains(station.name))
-                        {
-                            new Popup(station).Show();
-                        }
-                    }
-                    break;
-                case 1:
-                    Station s = client.GetAvailableVelibsInStation(lastCity, lastStation);
-                    if (s.name != null)
-                    {
-                        new Popup(s).Show();
-                    }
-                    break;
+                new Popup((Station)ResultBox.SelectedItem).Show();
             }
         }
     }

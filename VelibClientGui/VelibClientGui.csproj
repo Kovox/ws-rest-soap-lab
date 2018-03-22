@@ -88,7 +88,7 @@
     <None Include="Connected Services\VelibServices\VelibServices1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\VelibServices\VelibServices21.xsd">
+    <None Include="Connected Services\VelibServices\VelibServices2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\VelibLibrary.City.datasource" />
@@ -107,27 +107,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\VelibServices\VelibServices.disco" />
+    <None Include="Connected Services\VelibServices\configuration91.svcinfo" />
+    <None Include="Connected Services\VelibServices\configuration.svcinfo" />
     <None Include="Connected Services\VelibServices\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\VelibServices\configuration.svcinfo" />
-    <None Include="Connected Services\VelibServices\configuration91.svcinfo" />
-    <None Include="Connected Services\VelibServices\VelibServices.disco" />
     <Content Include="JCDecaux_Icon.ico" />
     <Content Include="search.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\VelibServices\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VelibLibrary\VelibLibrary.csproj">
       <Project>{CDB85851-98BA-499A-86F9-32BC4123C1FF}</Project>
       <Name>VelibLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\VelibServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

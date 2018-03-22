@@ -29,7 +29,7 @@ namespace VelibLibrary
 
         public Station RequestAvailableVelibsInStation(String city, String station)
         {
-            string resultStations = Request("https://api.jcdecaux.com/vls/v1/stations?contract=" + 
+            string resultStations = Request("https://api.jcdecaux.com/vls/v1/stations?contract=" +
                 city.ToUpper() + "&apiKey=9894216d065ff63cb3e3bf5f4eaad9f6da88df50");
             Clear();
             if (!resultStations.Equals("error"))
@@ -80,8 +80,14 @@ namespace VelibLibrary
         private void Clear()
         {
             // Clean up the streams and the response.
-            reader.Close();
-            response.Close();
+            if (reader != null)
+            {
+                reader.Close();
+            }
+            if (response != null)
+            {
+                response.Close();
+            }
         }
     }
 }

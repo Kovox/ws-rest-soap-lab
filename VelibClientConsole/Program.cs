@@ -7,6 +7,8 @@ namespace VelibClientConsole
 {
     public class Program
     {
+        private static Boolean quit = false;
+
         private static String INVITE = "Velib";
         private static String HELP_SYMBOL = "?";
         private static VelibServicesClient client = new VelibServicesClient("WSHTTP");
@@ -45,7 +47,8 @@ namespace VelibClientConsole
                                 rawArgs.Add(command[i]);
                             }
                         }
-                        shouldContinue = ProcessCommand(keyword, rawArgs);
+                        ProcessCommand(keyword, rawArgs);
+                        shouldContinue = !quit;
                     }
                 }
             }
@@ -60,12 +63,13 @@ namespace VelibClientConsole
                 "  - available_bikes: Request the number of the available Velib at a given station in a city.\n    Does support station name with spaces (available_bikes CITY STATION)\n");
         }
 
-        private static Boolean ProcessCommand(String keyword, List<String> rawArgs)
+        private static async void ProcessCommand(String keyword, List<String> rawArgs)
         {
             switch (keyword)
             {
                 case "quit":
-                    return false;
+                    quit = true;
+                    return;
                 case "stations":
                     if (rawArgs.Count < 1)
                     {
@@ -75,7 +79,7 @@ namespace VelibClientConsole
                     {
                         String city = String.Join(" ", rawArgs.ToArray());
                         String resultCityStation = "List of all the available stations in " + city + ":\n";
-                        Station[] stations = client.GetStationsInCity(city);
+                        Station[] stations = await client.GetStationsInCityAsync(city);
 
                         if (stations.Length != 0)
                         {
@@ -89,6 +93,7 @@ namespace VelibClientConsole
                         {
                             Console.WriteLine("The city " + city + " doesn't exist.");
                         }
+                        Console.Write(INVITE + " > ");
                     }
                     break;
                 case "available_bikes":
@@ -101,24 +106,26 @@ namespace VelibClientConsole
                         String city = rawArgs[0];
                         rawArgs.Remove(rawArgs[0]);
                         String station = String.Join(" ", rawArgs.ToArray());
-                        Station s = client.GetAvailableVelibsInStation(city, station);
+                        Station s = await client.GetAvailableVelibsInStationAsync(city, station);
 
                         if (s.name != null)
                         {
-                            Console.WriteLine(s.available_bikes + " bikes available at " + s.name + " station.");
+                            Console.WriteLine(s.available_bikes + " bikes available at " + s.name + 
+                                " station.");
                         }
                         else
                         {
                             Console.WriteLine("The station " + station + " or the city " + city +
                                 " doesn't exist.");
                         }
+                        Console.Write(INVITE + " > ");
                     }
                     break;
                 default:
                     Console.WriteLine("Unknown command: " + keyword);
                     break;
             }
-            return true;
+            quit = false;
         }
     }
 }

@@ -6,6 +6,7 @@ SOAP Intermediary Web Service and Client for Velib (JCDecaux) application.
 
 + Cache added to IWS. Admin Gui available in project VelibServerGui
 + Gui application
++ Async service (From Client application to IWS and IWS to Velib service)
 
 ## Projects usage
 

@@ -59,6 +59,11 @@ namespace VelibLibrary
         [DataMember]
         public String last_update { get; set; }
 
+        public String BikesAvailable
+        {
+            get { return bike_stands + " bikes available at " + name + " station."; }
+        }
+
         public override String ToString()
         {
             String station =

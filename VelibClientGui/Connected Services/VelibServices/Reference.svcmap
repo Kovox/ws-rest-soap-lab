@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e0388c2a-df7f-4d08-be17-bad4b1a512f8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7224df11-7220-439e-b292-009bb9aafc55" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:8733/VelibServices" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="VelibServices21.xsd" MetadataType="Schema" ID="a987fc2b-861e-4b83-a64d-0dde9e3be0ec" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd2" />
-    <MetadataFile FileName="VelibServices.xsd" MetadataType="Schema" ID="83b73740-601e-418d-b500-8953b06ebb84" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd0" />
-    <MetadataFile FileName="VelibServices.wsdl" MetadataType="Wsdl" ID="369eaa67-89cf-40c9-bc13-e2d704371a2e" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?wsdl" />
-    <MetadataFile FileName="VelibServices1.xsd" MetadataType="Schema" ID="d4cdb97a-fd5b-40ac-8bb6-4bb65d464d65" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd1" />
-    <MetadataFile FileName="VelibServices.disco" MetadataType="Disco" ID="3fbc63bc-bd1a-4403-a6bc-1489cceb3894" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?disco" />
+    <MetadataFile FileName="VelibServices.xsd" MetadataType="Schema" ID="86176693-f4b5-4d8a-8ee2-5c6b1034fa05" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd2" />
+    <MetadataFile FileName="VelibServices1.xsd" MetadataType="Schema" ID="f96f4860-0cab-4efe-b292-fd575a6c0e89" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd0" />
+    <MetadataFile FileName="VelibServices.wsdl" MetadataType="Wsdl" ID="5676b89f-9090-479a-9797-b62904f2bab2" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?wsdl" />
+    <MetadataFile FileName="VelibServices2.xsd" MetadataType="Schema" ID="f853dc9c-518b-4cb6-9543-92e1109d7ea2" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd1" />
+    <MetadataFile FileName="VelibServices.disco" MetadataType="Disco" ID="a9b51f98-5e0b-495a-b071-8fb8ef302523" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
