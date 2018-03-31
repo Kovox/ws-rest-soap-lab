@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\VelibServices\Reference.cs">
+    <Compile Include="Connected Services\AdminServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -76,14 +76,11 @@
     <EmbeddedResource Include="VelibServerForm.resx">
       <DependentUpon>VelibServerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Connected Services\VelibServices\VelibServices.wsdl" />
-    <None Include="Connected Services\VelibServices\VelibServices.xsd">
+    <None Include="Connected Services\AdminServices\AdminServices.wsdl" />
+    <None Include="Connected Services\AdminServices\AdminServices.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\VelibServices\VelibServices1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\VelibServices\VelibServices2.xsd">
+    <None Include="Connected Services\AdminServices\AdminServices1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\VelibLibrary.Station.datasource" />
@@ -98,23 +95,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\VelibServices\Reference.svcmap">
+    <None Include="Connected Services\AdminServices\AdminServices.disco" />
+    <None Include="Connected Services\AdminServices\configuration91.svcinfo" />
+    <None Include="Connected Services\AdminServices\configuration.svcinfo" />
+    <None Include="Connected Services\AdminServices\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\VelibServices\configuration.svcinfo" />
-    <None Include="Connected Services\VelibServices\configuration91.svcinfo" />
-    <None Include="Connected Services\VelibServices\VelibServices.disco" />
     <Content Include="JCDecaux_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\VelibServices\" />
+    <WCFMetadataStorage Include="Connected Services\AdminServices\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VelibLibrary\VelibLibrary.csproj">

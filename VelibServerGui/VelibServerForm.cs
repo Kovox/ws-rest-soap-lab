@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Web.Caching;
 using System.Windows.Forms;
-using VelibServerGui.VelibServices;
+using VelibServerGui.AdminServices;
 
 namespace VelibServerGui
 {
@@ -21,7 +21,7 @@ namespace VelibServerGui
         private const String infoLogSlidingExpirationError = "ERROR: Cache sliding expiration time has " +
             "to be a number...";
 
-        private static VelibServicesClient client = new VelibServicesClient("WSHTTP");
+        private static AdminServicesClient client = new AdminServicesClient("WSHTTP");
 
         public VelibServerForm()
         {

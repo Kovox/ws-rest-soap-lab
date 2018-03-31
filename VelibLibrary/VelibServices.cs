@@ -17,7 +17,6 @@ namespace VelibLibrary
                 request = await requestHandler.RequestStations(city);
                 CacheExtension.Add(city, request);
             }
-            Thread.Sleep(5000);
             return request;
         }
 

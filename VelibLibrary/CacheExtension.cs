@@ -11,7 +11,7 @@ namespace VelibLibrary
         private static Cache applicationCache = HttpRuntime.Cache;
 
         private static DateTime absoluteExpiration = Cache.NoAbsoluteExpiration;
-        private static TimeSpan slidingExpiration = TimeSpan.FromMinutes(5);
+        private static TimeSpan slidingExpiration = TimeSpan.FromMinutes(1);
 
         // Cache getter
         public static Cache Cache
