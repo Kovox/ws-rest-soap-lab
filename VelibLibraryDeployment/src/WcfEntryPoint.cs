@@ -7,28 +7,13 @@ using System.Threading.Tasks;
 
 namespace VelibLibrary
 {
-    /*
-    public partial class WcfEntryPoint
-    {
-        public static void Configure(ServiceConfiguration config)
-        {
-            ServiceEndpoint vse = new ServiceEndpoint(new ContractDescription("IVelibServices"), new WSHttpBinding(), new EndpointAddress("/WS/VelibServices"));
-            ServiceEndpoint ase = new ServiceEndpoint(new ContractDescription("IAdminServices"), new WSHttpBinding(), new EndpointAddress("/WS/AdminServices"));
-            config.AddServiceEndpoint(vse);
-            config.AddServiceEndpoint(ase);
-
-            config.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true });
-            config.Description.Behaviors.Add(new ServiceDebugBehavior { IncludeExceptionDetailInFaults = true });
-        }
-    }
-    */
-
-    public partial class VelibServices : IVelibServices
+    public partial class WcfEntryPoint : IVelibServices
     {
         private JCDecauxRequestHandler requestHandler = new JCDecauxRequestHandler();
 
         public async Task<List<Station>> GetStationsInCity(String city)
         {
+            Console.WriteLine("GetStationsInCity(" + city + ") request received...");
             List<Station> request = CacheExtension.Get<List<Station>>(city);
             if (request == null)
             {
@@ -40,6 +25,7 @@ namespace VelibLibrary
 
         public async Task<Station> GetAvailableVelibsInStation(String city, String station)
         {
+            Console.WriteLine("GetAvailableVelibsInStation(" + city + ", " + station + ") request received...");
             Station request = CacheExtension.Get<Station>(city + station);
             if (request == null)
             {
@@ -50,7 +36,7 @@ namespace VelibLibrary
         }
     }
 
-    public partial class AdminServices : IAdminServices
+    public partial class WcfEntryPoint : IAdminServices
     {
         public int RetrieveTotalConnections()
         {

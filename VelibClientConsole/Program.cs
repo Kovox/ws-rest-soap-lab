@@ -11,7 +11,7 @@ namespace VelibClientConsole
 
         private static String INVITE = "Velib";
         private static String HELP_SYMBOL = "?";
-        private static VelibServicesClient client = new VelibServicesClient("WSHTTP");
+        private static VelibServicesClient client = new VelibServicesClient("BasicHTTP");
 
         static void Main(string[] args)
         {

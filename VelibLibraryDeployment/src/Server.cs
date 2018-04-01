@@ -21,8 +21,7 @@ public class Server
     private string Locker = "server.LOCK";
 
     // Web Server used to host services
-    private WebServiceHost Host1;
-    private WebServiceHost Host2;
+    private ServiceHost Host;
 
     /**
      * Start the web server on the given port, and host the expected service
@@ -32,72 +31,36 @@ public class Server
         Console.WriteLine("Starting a WCF self-hosted .Net server... ");
         string url = "http://" + "localhost" + ":" + Port + "/VelibServices";
 
-        // Create the ServiceHost.
-        using (Host1 = new WebServiceHost(typeof(VelibServices), new Uri(url)))
-        {
-            // Enable metadata publishing.
-            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-            smb.HttpGetEnabled = true;
-            Host1.Description.Behaviors.Add(smb);
-
-            BasicHttpBinding b = new BasicHttpBinding();
-            ServiceEndpoint endpoint = Host1.AddServiceEndpoint(typeof(IVelibServices), b, "/WS/VelibService");
-
-            WebHttpBehavior behavior = new WebHttpBehavior();
-            behavior.Validate(endpoint);
-            endpoint.Behaviors.Add(behavior);
-
-            // Open the ServiceHost to start listening for messages. Since
-            // no endpoints are explicitly configured, the runtime will create
-            // one endpoint per base address for each service contract implemented
-            // by the service.
-            Host1.Open();
-        }
-
-        // Create the ServiceHost.
-        using (Host2 = new WebServiceHost(typeof(AdminServices), new Uri(url)))
-        {
-            // Enable metadata publishing.
-            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-            smb.HttpGetEnabled = true;
-            Host2.Description.Behaviors.Add(smb);
-
-            BasicHttpBinding b = new BasicHttpBinding();
-            ServiceEndpoint endpoint = Host2.AddServiceEndpoint(typeof(IAdminServices), b, "/WS/AdminService");
-
-            WebHttpBehavior behavior = new WebHttpBehavior();
-            behavior.Validate(endpoint);
-            endpoint.Behaviors.Add(behavior);
-
-            // Open the ServiceHost to start listening for messages. Since
-            // no endpoints are explicitly configured, the runtime will create
-            // one endpoint per base address for each service contract implemented
-            // by the service.
-            Host2.Open();
-        }
-
-        Console.WriteLine("\nListening to " + "localhost" + ":" + Port + "\n");
-
-        if (Standalone)
-        {
-            lockServer();
-        }
-        else
-        {
-            interactive();
-        }
-
-        /*
-        WSHttpBinding b = new WSHttpBinding();
+        BasicHttpBinding b = new BasicHttpBinding();
         Host = new ServiceHost(typeof(WcfEntryPoint), new Uri(url));
+        /*
+        // Check to see if the service host already has a ServiceMetadataBehavior
+        ServiceMetadataBehavior smb = Host.Description.Behaviors.Find<ServiceMetadataBehavior>();
+        // If not, add one
+        if (smb == null)
+        {
+            smb = new ServiceMetadataBehavior();
+        }
 
-        Host.AddServiceEndpoint(typeof(IVelibServices), b, "/WS/VelibService");
-        Host.AddServiceEndpoint(typeof(IAdminServices), b, "/WS/AdminService");
-        
+        smb.HttpGetEnabled = true;
+
+        Host.Description.Behaviors.Add(smb);
+
+        Host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
+
+        // Add MEX endpoint
+        Host.AddServiceEndpoint(
+          ServiceMetadataBehavior.MexContractName,
+          MetadataExchangeBindings.CreateMexHttpBinding(),
+          "mex"
+        );
+        */
+        Host.AddServiceEndpoint(typeof(IVelibServices), b, "/Basic/VelibServices");
+        Host.AddServiceEndpoint(typeof(IAdminServices), b, "/Basic/AdminServices");
 
         // Starting the Host server
         Host.Open();
-        Console.WriteLine("\nListening to " + "localhost" + ":" + Port + "\n");
+        Console.WriteLine("\nListening to " + "localhost" + ":" + Port + "/VelibServices\n");
 
         if (Standalone)
         {
@@ -107,7 +70,6 @@ public class Server
         {
             interactive();
         }
-        */
     }
 
     /**
@@ -115,8 +77,7 @@ public class Server
      */
     private void stop()
     {
-        Host1.Close();
-        Host2.Close();
+        Host.Close();
         Console.WriteLine("Server shutdown complete!");
     }
 

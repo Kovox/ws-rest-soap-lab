@@ -23,7 +23,7 @@ namespace VelibClientGui
         private static String lastCity = "";
         private static String lastStation = "";
 
-        private static VelibServicesClient client = new VelibServicesClient("WSHTTP");
+        private static VelibServicesClient client = new VelibServicesClient("BasicHTTP");
 
         public VelibClientForm()
         {
