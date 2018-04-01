@@ -41,6 +41,8 @@ and the server is now running under mono and deployed on a docker container.
 
 Then just run either the VelibClientGui.exe in the console VelibClientConsole/bin/Debug or the VelibClientConsole.exe in the VelibClientConsole/bin/Debug **(as administrator)** and send requests.
 
+**Unfortunately** there is a remaining error that I didn't manage to resolve. This error prevents my server from correctly processing the request from the client, and it seems to be because of the basicHttpBinding. But the client efficiently sends a message to the IWS. SOAP seems to be hard to implements with mono.
+
 ## How to use the different applications
 
 The projects below :
@@ -56,3 +58,7 @@ Have to be launched from visual studio to work properly as the VelibLibrary won'
 I've added another empty Contract named AdminServices which implements the interface IAdminServices so that if someone has to continue developping the application to implement the Monitoring extension for example, he just has to add the operations he wants. Also, I've added a monitoring section in the VelibServerGui so that the administrator can manage cache and see the monitoring in the same application.
 
 I had to change the binding when it came to implement the deployment extension because the communication between the client and the IWS with WSHttpBinding does not work with mono. Indeed mono doen't support a such binding. I had to go for a BasicHttpBinding instead.
+
+# TD_Work
+
+You will find in the folder named TD the work done in the course sessions since the beginning.
