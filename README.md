@@ -17,6 +17,12 @@ SOAP Intermediary Web Service and Client for Velib (JCDecaux) application.
 + VelibLibraryDeployment is used for the deployment of the IWS.
 + VelibServerGui is the admin application provided with user interface. It allows the admin to manage the settings of the IWS Cache.
 
+To use the different projects, do the following instructions:
+
+1. Clone the git
+2. Open an instance of Visual Studio **(as administrator)**
+3. Open the VelibApplication.sln
+
 ## Deployment
 
 I wanted to make the deployment independent from Visual Studio, this is why there is no .sln or .csproj. There is a file named Server.cs which allow to launch the server and get a .exe when compiling instead of having a .dll file. To compile the .cs files and run the .exe file with mono the steps are :
@@ -61,4 +67,4 @@ I had to change the binding when it came to implement the deployment extension b
 
 # TD_Work
 
-You will find in the folder named TD the work done in the course sessions since the beginning.
+You will find in the folder named TD_Work the work done in the course sessions since the beginning.
