@@ -14,6 +14,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ModifySharedValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="modifier" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifySharedValueResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SubscribeCalculatedEvent">
     <xs:complexType>
       <xs:sequence />
@@ -34,6 +46,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="SubscribeSharedValueModifiedEvent">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubscribeSharedValueModifiedEventResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="Calculated">
     <xs:complexType>
       <xs:sequence>
@@ -47,6 +69,13 @@
   <xs:element name="CalculationFinished">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SharedValueModified">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="modifier" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

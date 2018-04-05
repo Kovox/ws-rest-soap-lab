@@ -1,13 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace VelibLibrary
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class VelibServices : IVelibServices
     {
+        static Action<Station> stationEvent = delegate { };
+
         private JCDecauxRequestHandler requestHandler = new JCDecauxRequestHandler();
+
+        public void SubscribeToStationEvent()
+        {
+            IVelibServicesEvents subscriber =
+            OperationContext.Current.GetCallbackChannel<IVelibServicesEvents>();
+            stationEvent += subscriber.StationVelibInfo;
+        }
+
+        public void UnsubscribeToStationEvent()
+        {
+            IVelibServicesEvents subscriber =
+            OperationContext.Current.GetCallbackChannel<IVelibServicesEvents>();
+            stationEvent -= subscriber.StationVelibInfo;
+        }
 
         public async Task<List<Station>> GetStationsInCity(String city)
         {
@@ -28,6 +46,13 @@ namespace VelibLibrary
                 request = await requestHandler.RequestAvailableVelibsInStation(city, station);
                 CacheExtension.Add(city + station, request);
             }
+            return request;
+        }
+
+        public async Task<Station> StationSubEvent(int time, string city, string station)
+        {
+            Station request = await requestHandler.RequestAvailableVelibsInStation(city, station);
+            stationEvent(request);
             return request;
         }
     }

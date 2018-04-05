@@ -18,11 +18,32 @@ namespace EventsClient.CalcServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/Calculate", ReplyAction="http://tempuri.org/ICalcService/CalculateResponse")]
         void Calculate(int nOp, double dblNum1, double dblNum2);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/Calculate", ReplyAction="http://tempuri.org/ICalcService/CalculateResponse")]
+        System.Threading.Tasks.Task CalculateAsync(int nOp, double dblNum1, double dblNum2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/ModifySharedValue", ReplyAction="http://tempuri.org/ICalcService/ModifySharedValueResponse")]
+        void ModifySharedValue(int modifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/ModifySharedValue", ReplyAction="http://tempuri.org/ICalcService/ModifySharedValueResponse")]
+        System.Threading.Tasks.Task ModifySharedValueAsync(int modifier);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/SubscribeCalculatedEvent", ReplyAction="http://tempuri.org/ICalcService/SubscribeCalculatedEventResponse")]
         void SubscribeCalculatedEvent();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/SubscribeCalculatedEvent", ReplyAction="http://tempuri.org/ICalcService/SubscribeCalculatedEventResponse")]
+        System.Threading.Tasks.Task SubscribeCalculatedEventAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/SubscribeCalculationFinishedEvent", ReplyAction="http://tempuri.org/ICalcService/SubscribeCalculationFinishedEventResponse")]
         void SubscribeCalculationFinishedEvent();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/SubscribeCalculationFinishedEvent", ReplyAction="http://tempuri.org/ICalcService/SubscribeCalculationFinishedEventResponse")]
+        System.Threading.Tasks.Task SubscribeCalculationFinishedEventAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/SubscribeSharedValueModifiedEvent", ReplyAction="http://tempuri.org/ICalcService/SubscribeSharedValueModifiedEventResponse")]
+        void SubscribeSharedValueModifiedEvent();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalcService/SubscribeSharedValueModifiedEvent", ReplyAction="http://tempuri.org/ICalcService/SubscribeSharedValueModifiedEventResponse")]
+        System.Threading.Tasks.Task SubscribeSharedValueModifiedEventAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -33,6 +54,9 @@ namespace EventsClient.CalcServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICalcService/CalculationFinished")]
         void CalculationFinished();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICalcService/SharedValueModified")]
+        void SharedValueModified(int modifier);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -67,12 +91,40 @@ namespace EventsClient.CalcServiceReference {
             base.Channel.Calculate(nOp, dblNum1, dblNum2);
         }
         
+        public System.Threading.Tasks.Task CalculateAsync(int nOp, double dblNum1, double dblNum2) {
+            return base.Channel.CalculateAsync(nOp, dblNum1, dblNum2);
+        }
+        
+        public void ModifySharedValue(int modifier) {
+            base.Channel.ModifySharedValue(modifier);
+        }
+        
+        public System.Threading.Tasks.Task ModifySharedValueAsync(int modifier) {
+            return base.Channel.ModifySharedValueAsync(modifier);
+        }
+        
         public void SubscribeCalculatedEvent() {
             base.Channel.SubscribeCalculatedEvent();
         }
         
+        public System.Threading.Tasks.Task SubscribeCalculatedEventAsync() {
+            return base.Channel.SubscribeCalculatedEventAsync();
+        }
+        
         public void SubscribeCalculationFinishedEvent() {
             base.Channel.SubscribeCalculationFinishedEvent();
+        }
+        
+        public System.Threading.Tasks.Task SubscribeCalculationFinishedEventAsync() {
+            return base.Channel.SubscribeCalculationFinishedEventAsync();
+        }
+        
+        public void SubscribeSharedValueModifiedEvent() {
+            base.Channel.SubscribeSharedValueModifiedEvent();
+        }
+        
+        public System.Threading.Tasks.Task SubscribeSharedValueModifiedEventAsync() {
+            return base.Channel.SubscribeSharedValueModifiedEventAsync();
         }
     }
 }

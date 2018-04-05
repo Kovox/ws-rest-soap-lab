@@ -19,14 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8733/VelibServices" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8733/VelibServices/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="VelibServices21.xsd" MetadataType="Schema" ID="03230b4c-5a16-4fc4-8724-dfc6e03e6eea" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd2" />
-    <MetadataFile FileName="VelibServices.xsd" MetadataType="Schema" ID="31a2ef1f-5615-465c-8979-f619233c62be" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd0" />
-    <MetadataFile FileName="VelibServices.wsdl" MetadataType="Wsdl" ID="a9710f58-a504-4649-a46c-fa88a2d29e7a" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?wsdl" />
-    <MetadataFile FileName="VelibServices1.xsd" MetadataType="Schema" ID="59880ac7-49a7-4e1b-a1d7-e26b646c8727" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?xsd=xsd1" />
-    <MetadataFile FileName="VelibServices.disco" MetadataType="Disco" ID="ea29a90c-a4ff-4bc5-bdbd-dd14a0892852" SourceId="1" SourceUrl="http://localhost:8733/VelibServices?disco" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="44c48138-c5ae-4fdb-897d-baac0151440a" SourceId="1" SourceUrl="http://localhost:8733/VelibServices/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3af1c1c5-0b77-43ef-8829-4c31b69f369e" SourceId="1" SourceUrl="http://localhost:8733/VelibServices/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="d9151a12-a1bd-4fd2-a136-447fe36fd0f3" SourceId="1" SourceUrl="http://localhost:8733/VelibServices/mex" />
+    <MetadataFile FileName="VelibLibrary.xsd" MetadataType="Schema" ID="06e7254c-a4c5-4188-9605-1ad45829dcdc" SourceId="1" SourceUrl="http://localhost:8733/VelibServices/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

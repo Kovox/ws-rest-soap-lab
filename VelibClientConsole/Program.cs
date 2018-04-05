@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ServiceModel;
+using System.Threading;
 using VelibClientConsole.VelibServices;
 using VelibLibrary;
 
@@ -11,7 +13,12 @@ namespace VelibClientConsole
 
         private static String INVITE = "Velib";
         private static String HELP_SYMBOL = "?";
-        private static VelibServicesClient client = new VelibServicesClient("BasicHTTP");
+
+        private static Timer timer;
+
+        static IVelibServicesCallback objsink = new VelibServiceCallbackSink();
+        static InstanceContext iCntxt = new InstanceContext(objsink);
+        private static VelibServicesClient client = new VelibServicesClient(iCntxt);
 
         static void Main(string[] args)
         {
@@ -60,7 +67,8 @@ namespace VelibClientConsole
                 "Available user commands:\n" +
                 "  - quit: Exit Velib Application\n" +
                 "  - stations: Request for the list of velib stations for a given city.\n    Does support city name with spaces (stations CITY)\n" +
-                "  - available_bikes: Request the number of the available Velib at a given station in a city.\n    Does support station name with spaces (available_bikes CITY STATION)\n");
+                "  - available_bikes: Request the number of the available Velib at a given station in a city.\n    Does support station name with spaces (available_bikes CITY STATION)\n" +
+                "  - subscribe_station: Subscribe to a given station every T to retrieve the available Velib.\n    Does support station name with spaces (subscribe_station T CITY STATION)\n");
         }
 
         private static async void ProcessCommand(String keyword, List<String> rawArgs)
@@ -110,7 +118,7 @@ namespace VelibClientConsole
 
                         if (s.name != null)
                         {
-                            Console.WriteLine(s.available_bikes + " bikes available at " + s.name + 
+                            Console.WriteLine(s.available_bikes + " bikes available at " + s.name +
                                 " station.");
                         }
                         else
@@ -121,11 +129,60 @@ namespace VelibClientConsole
                         Console.Write(INVITE + " > ");
                     }
                     break;
+                case "subscribe_station":
+                    if (rawArgs.Count < 3)
+                    {
+                        Console.WriteLine("Illegal arguments for command " + keyword);
+                    }
+                    else if (rawArgs.Count >= 3)
+                    {
+                        if (Int32.TryParse(rawArgs[0], out int time))
+                        {
+                            String city = rawArgs[1];
+                            rawArgs.Remove(rawArgs[0]);
+                            rawArgs.Remove(rawArgs[0]);
+                            String station = String.Join(" ", rawArgs.ToArray());
+
+                            SubscribeEvent sub = new SubscribeEvent();
+                            sub.Time = time;
+                            sub.City = city;
+                            sub.Station = station;
+
+                            client.SubscribeToStationEvent();
+
+                            Station s = await client.StationSubEventAsync(time, city, station);
+                            if (s.name != null)
+                            {
+                                timer = new Timer(Process, sub, time * 60000, time * 60000);
+                            }
+                            
+                            Console.Write(INVITE + " > ");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Second argument must be a number (integer)");
+                        }
+                    }
+                    break;
                 default:
                     Console.WriteLine("Unknown command: " + keyword);
                     break;
             }
             quit = false;
         }
+
+        public static async void Process(object sub)
+        {
+            SubscribeEvent subscribe = (SubscribeEvent)sub;
+            await client.StationSubEventAsync(subscribe.Time, subscribe.City, subscribe.Station);
+            Console.Write("Velib > ");
+        }
+    }
+
+    public class SubscribeEvent
+    {
+        public int Time { get; set; }
+        public String City { get; set; }
+        public String Station { get; set; }
     }
 }

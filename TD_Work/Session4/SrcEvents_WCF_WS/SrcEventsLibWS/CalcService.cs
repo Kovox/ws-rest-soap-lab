@@ -6,8 +6,11 @@ namespace EventsLib
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class CalcService : ICalcService
     {
+        public static int sharedValue = 0;
+
         static Action<int, double, double, double> m_Event1 = delegate { };
         static Action m_Event2 = delegate { };
+        static Action<int> m_Event3 = delegate { };
 
         public void SubscribeCalculatedEvent()
         {
@@ -23,6 +26,13 @@ namespace EventsLib
             m_Event2 += subscriber.CalculationFinished;
         }
 
+        public void SubscribeSharedValueModifiedEvent()
+        {
+            ICalcServiceEvents subscriber = 
+            OperationContext.Current.GetCallbackChannel<ICalcServiceEvents>();
+            m_Event3 += subscriber.SharedValueModified;
+        }
+
         public void Calculate(int nOp, double dblX, double dblY)
         {
             double dblResult = 0;
@@ -36,6 +46,12 @@ namespace EventsLib
 
             m_Event1(nOp, dblX, dblY, dblResult);
             m_Event2();
+        }
+
+        public void ModifySharedValue(int modifier)
+        {
+            sharedValue = modifier;
+            m_Event3(modifier);
         }
     }
 }

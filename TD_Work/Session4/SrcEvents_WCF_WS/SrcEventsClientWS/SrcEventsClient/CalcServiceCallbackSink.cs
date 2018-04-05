@@ -22,5 +22,10 @@ namespace EventsClient
         {
             Console.WriteLine("Calculation completed");
         }
+
+        public void SharedValueModified(int modifier)
+        {
+            Console.WriteLine("Shared value has changed: {0}", modifier);
+        }
     }
 }

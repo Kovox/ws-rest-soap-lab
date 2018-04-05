@@ -9,5 +9,8 @@ namespace EventsLib
 
         [OperationContract(IsOneWay = true)]
         void CalculationFinished();
+
+        [OperationContract(IsOneWay = true)]
+        void SharedValueModified(int modifier);
     }
 }

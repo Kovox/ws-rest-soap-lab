@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EventsClient.CalcServiceReference;
+using System;
 using System.ServiceModel;
 
 namespace EventsClient
@@ -10,10 +11,11 @@ namespace EventsClient
             CalcServiceCallbackSink objsink = new CalcServiceCallbackSink();
             InstanceContext iCntxt = new InstanceContext(objsink);
 
-            CalcServiceReference.CalcServiceClient objClient = 
-                new CalcServiceReference.CalcServiceClient(iCntxt);
+            CalcServiceClient objClient = 
+                new CalcServiceClient(iCntxt);
             objClient.SubscribeCalculatedEvent();
             objClient.SubscribeCalculationFinishedEvent();
+            objClient.SubscribeSharedValueModifiedEvent();
 
             double dblNum1 = 1000, dblNum2 = 2000;
             objClient.Calculate(0, dblNum1, dblNum2);
